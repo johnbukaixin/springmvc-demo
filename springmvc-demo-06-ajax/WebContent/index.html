@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("input:eq(3)").click(function(){
+			var data = $("form").serialize();
+			$.ajax({
+				url : "user/textAjax.do",
+				type : "post",
+				dataType : "json",
+				data : data,
+				success : function(data){
+					alert(data.username);
+				},
+				error : function(){
+					alert("error");
+				}
+			});
+		});
+		
+		$("input:eq(4)").click(function(){
+			var data={
+					"username":"zhangsan",
+					"pwd":"123"
+			};
+			$.ajax({
+				url : "user/jsonAjax.do",
+				type : "post",
+				dataType : "json",
+				data :data,
+				contentType:"application/json;charset=utf-8",
+				success : function(data){
+					alert(data);
+				},
+				error : function(){
+					alert("error");
+				}
+			});
+		});
+	})
+</script> 
+</head>
+<body>
+	<form onsubmit="return false">
+		<input name="userId" placeholder="id"><br> 
+		<input name="username" placeholder="请输入名字"><br> 
+		<input name="pwd" placeholder="请输入密码"><br> 
+		<input type="submit" value="one提交">
+	</form>
+	
+	<input type="submit" value="json提交">
+</body>
+</html>
